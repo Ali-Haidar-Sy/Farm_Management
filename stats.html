@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}الخراف{% endblock %}
+{% block content %}
+<h1><i class="fas fa-sheep"></i> إدارة الخراف</h1>
+
+<div class="animal-list">
+    {% for sheep in sheep %}
+    <div class="animal-card" id="animal-{{ sheep.id }}" {% if request.args.get('highlight') == sheep.id|string %}style="border: 3px solid #27ae60;"{% endif %}>
+        <div class="animal-header">
+            <span class="animal-name">خروف رقم {{ sheep.id }}</span>
+            <span class="badge {{ sheep.health_status }}">{{ sheep.health_status }}</span>
+        </div>
+        <div class="animal-details">
+            <p><strong>الباركود:</strong> {{ sheep.barcode }}</p>
+            <p><strong>آخر فحص:</strong> {{ sheep.last_check }}</p>
+            {% if sheep.last_production %}
+            <p><strong>آخر إنتاج:</strong> {{ sheep.last_production.quantity }} {{ sheep.last_production.unit }} ({{ sheep.last_production.date }})</p>
+            {% endif %}
+        </div>
+        <div class="animal-actions">
+            <a href="{{ url_for('add_production', animal_id=sheep.id, type='sheep') }}" class="btn btn-sm"><i class="fas fa-plus-circle"></i> إضافة إنتاج</a>
+            <form action="{{ url_for('add_note', animal_id=sheep.id, type='sheep') }}" method="post" style="display:inline;">
+                <input type="text" name="note" placeholder="ملاحظة..." required>
+                <button type="submit" class="btn btn-sm"><i class="fas fa-sticky-note"></i> إضافة</button>
+            </form>
+            {% if session.role == 'admin' %}
+            <a href="{{ url_for('edit_animal', id=sheep.id) }}" class="btn btn-sm"><i class="fas fa-edit"></i> تعديل</a>
+            <form action="{{ url_for('delete_animal', id=sheep.id) }}" method="post" style="display:inline;" onsubmit="return confirm('هل أنت متأكد من حذف هذا الحيوان؟');">
+                <button type="submit" class="btn btn-sm" style="background:#e74c3c;"><i class="fas fa-trash"></i> حذف</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

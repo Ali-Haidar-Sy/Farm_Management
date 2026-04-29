@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}الإدارة المالية{% endblock %}
+{% block content %}
+<h1><i class="fas fa-coins"></i> الإدارة المالية</h1>
+
+<div class="summary-cards">
+    <div class="summary-card income">
+        <h3>دخل هذا الشهر</h3>
+        <p>{{ month_income }}</p>
+    </div>
+    <div class="summary-card expense">
+        <h3>مصروفات هذا الشهر</h3>
+        <p>{{ month_expense }}</p>
+    </div>
+    <div class="summary-card balance">
+        <h3>صافي الرصيد</h3>
+        <p class="{{ 'positive' if month_balance >=0 else 'negative' }}">{{ month_balance }}</p>
+    </div>
+</div>
+
+{% if session.role == 'admin' %}
+<div style="margin:20px 0;">
+    <a href="{{ url_for('add_finance') }}" class="btn btn-primary"><i class="fas fa-plus"></i> إضافة معاملة</a>
+</div>
+{% endif %}
+
+<h2>آخر المعاملات</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>التاريخ</th>
+            <th>النوع</th>
+            <th>التصنيف</th>
+            <th>المبلغ</th>
+            <th>الوصف</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in finances %}
+        <tr>
+            <td>{{ row.date }}</td>
+            <td>{{ 'دخل' if row.type == 'income' else 'مصروف' }}</td>
+            <td>{{ row.category }}</td>
+            <td>{{ row.amount }}</td>
+            <td>{{ row.description }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

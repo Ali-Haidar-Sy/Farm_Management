@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}إضافة حيوان جديد{% endblock %}
+{% block content %}
+<h2><i class="fas fa-plus-circle"></i> إضافة حيوان جديد</h2>
+<form method="post">
+    <div class="form-group">
+        <label>النوع</label>
+        <select name="type" required>
+            <option value="cow">بقرة</option>
+            <option value="sheep">خروف</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>الباركود (اختياري)</label>
+        <input type="text" name="barcode" placeholder="مثال: COW123">
+    </div>
+    <div class="form-group">
+        <label>الحالة الصحية</label>
+        <select name="health_status" required>
+            <option value="ممتاز">ممتاز</option>
+            <option value="جيد">جيد</option>
+            <option value="بحاجة علاج">بحاجة علاج</option>
+            <option value="بحاجة مراقبة">بحاجة مراقبة</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>تاريخ آخر فحص</label>
+        <input type="date" name="last_check" value="{{ today_date }}" required>
+    </div>
+    <div class="form-group">
+        <label>ملاحظات (اختياري)</label>
+        <textarea name="notes" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">إضافة</button>
+    <a href="{{ url_for('dashboard') }}" class="btn">إلغاء</a>
+</form>
+{% endblock %}

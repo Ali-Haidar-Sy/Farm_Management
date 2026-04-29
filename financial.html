@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}تعديل بيانات الحيوان{% endblock %}
+{% block content %}
+<h2><i class="fas fa-edit"></i> تعديل بيانات الحيوان رقم {{ animal.id }}</h2>
+<form method="post">
+    <div class="form-group">
+        <label>النوع</label>
+        <select name="type" required>
+            <option value="cow" {% if animal.type == 'cow' %}selected{% endif %}>بقرة</option>
+            <option value="sheep" {% if animal.type == 'sheep' %}selected{% endif %}>خروف</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>الباركود</label>
+        <input type="text" name="barcode" value="{{ animal.barcode or '' }}">
+    </div>
+    <div class="form-group">
+        <label>الحالة الصحية</label>
+        <select name="health_status" required>
+            <option value="ممتاز" {% if animal.health_status == 'ممتاز' %}selected{% endif %}>ممتاز</option>
+            <option value="جيد" {% if animal.health_status == 'جيد' %}selected{% endif %}>جيد</option>
+            <option value="بحاجة علاج" {% if animal.health_status == 'بحاجة علاج' %}selected{% endif %}>بحاجة علاج</option>
+            <option value="بحاجة مراقبة" {% if animal.health_status == 'بحاجة مراقبة' %}selected{% endif %}>بحاجة مراقبة</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>تاريخ آخر فحص</label>
+        <input type="date" name="last_check" value="{{ animal.last_check }}" required>
+    </div>
+    <div class="form-group">
+        <label>ملاحظات</label>
+        <textarea name="notes" rows="3">{{ animal.notes or '' }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+    <a href="{{ url_for(animal.type + 's') }}" class="btn">إلغاء</a>
+</form>
+{% endblock %}

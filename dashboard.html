@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}الأبقار{% endblock %}
+{% block content %}
+<h1><i class="fas fa-cow"></i> إدارة الأبقار</h1>
+
+<div class="animal-list">
+    {% for cow in cows %}
+    <div class="animal-card" id="animal-{{ cow.id }}" {% if request.args.get('highlight') == cow.id|string %}style="border: 3px solid #27ae60;"{% endif %}>
+        <div class="animal-header">
+            <span class="animal-name">بقرة رقم {{ cow.id }}</span>
+            <span class="badge {{ cow.health_status }}">{{ cow.health_status }}</span>
+        </div>
+        <div class="animal-details">
+            <p><strong>الباركود:</strong> {{ cow.barcode }}</p>
+            <p><strong>آخر فحص:</strong> {{ cow.last_check }}</p>
+            {% if cow.last_production %}
+            <p><strong>آخر إنتاج:</strong> {{ cow.last_production.quantity }} {{ cow.last_production.unit }} ({{ cow.last_production.date }})</p>
+            {% endif %}
+        </div>
+        <div class="animal-actions">
+            <a href="{{ url_for('add_production', animal_id=cow.id, type='cows') }}" class="btn btn-sm"><i class="fas fa-plus-circle"></i> إضافة إنتاج</a>
+            <form action="{{ url_for('add_note', animal_id=cow.id, type='cows') }}" method="post" style="display:inline;">
+                <input type="text" name="note" placeholder="ملاحظة..." required>
+                <button type="submit" class="btn btn-sm"><i class="fas fa-sticky-note"></i> إضافة</button>
+            </form>
+            {% if session.role == 'admin' %}
+            <a href="{{ url_for('edit_animal', id=cow.id) }}" class="btn btn-sm"><i class="fas fa-edit"></i> تعديل</a>
+            <form action="{{ url_for('delete_animal', id=cow.id) }}" method="post" style="display:inline;" onsubmit="return confirm('هل أنت متأكد من حذف هذا الحيوان؟');">
+                <button type="submit" class="btn btn-sm" style="background:#e74c3c;"><i class="fas fa-trash"></i> حذف</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
