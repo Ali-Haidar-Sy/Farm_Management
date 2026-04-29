@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}إحصائيات الإنتاج{% endblock %}
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+{% block content %}
+<h1><i class="fas fa-chart-line"></i> تحليل الإنتاج (آخر 7 أيام)</h1>
+
+<div class="chart-container">
+    <canvas id="productionChart"></canvas>
+</div>
+
+<script>
+    const ctx = document.getElementById('productionChart').getContext('2d');
+    const dates = {{ dates | tojson }};
+    const datasets = {{ datasets | tojson }};
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: datasets.map(ds => ({
+                label: ds.label,
+                data: ds.data,
+                borderColor: ds.label === 'أبقار' ? '#2ecc71' : '#e67e22',
+                backgroundColor: 'transparent',
+                tension: 0.2,
+                fill: false
+            }))
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'مقارنة الإنتاج اليومي' }
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+{% endblock %}

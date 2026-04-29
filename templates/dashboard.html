@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}لوحة التحكم{% endblock %}
+{% block content %}
+<h1><i class="fas fa-tachometer-alt"></i> لوحة التحكم</h1>
+
+<!-- البحث بالباركود -->
+<div class="barcode-search">
+    <form action="{{ url_for('search_by_barcode') }}" method="post">
+        <input type="text" name="barcode" placeholder="أدخل رقم الباركود" required>
+        <button type="submit" class="btn"><i class="fas fa-search"></i> بحث</button>
+    </form>
+</div>
+
+<div class="cards">
+    <div class="card">
+        <h3><i class="fas fa-paw"></i> عدد الحيوانات</h3>
+        <ul>
+            {% for row in animals_count %}
+                <li>
+                    {% if row.type == 'cow' %}
+                        أبقار
+                    {% elif row.type == 'sheep' %}
+                        خراف
+                    {% else %}
+                        {{ row.type }}
+                    {% endif %}: {{ row.count }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3><i class="fas fa-heartbeat"></i> الحالة الصحية</h3>
+        <ul>
+            {% for row in health_status %}
+                <li>{{ row.health_status }}: {{ row.count }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3><i class="fas fa-calendar-day"></i> إنتاج اليوم</h3>
+        <ul>
+            {% if today_production %}
+                {% for row in today_production %}
+                    <li>
+                        {% if row.type == 'cow' %}
+                            أبقار
+                        {% elif row.type == 'sheep' %}
+                            خراف
+                        {% else %}
+                            {{ row.type }}
+                        {% endif %}: {{ row.total }} {{ row.unit }}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>لا يوجد إنتاج مسجل اليوم</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3><i class="fas fa-chart-pie"></i> ملخص مالي (7 أيام)</h3>
+        <p>الدخل: {{ income }}</p>
+        <p>المصروفات: {{ expense }}</p>
+        <p>العجز/الفائض: <span class="{{ 'positive' if deficit >=0 else 'negative' }}">{{ deficit }}</span></p>
+    </div>
+</div>
+{% endblock %}
