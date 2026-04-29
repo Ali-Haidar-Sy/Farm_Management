@@ -1,0 +1,358 @@
+/* static/style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f5f7fa;
+    color: #2c3e50;
+}
+
+/* الشريط العلوي */
+.navbar {
+    background: #2c3e50;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ecf0f1;
+}
+
+.nav-links a, .nav-user a {
+    color: #ecf0f1;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-user a:hover {
+    color: #f1c40f;
+}
+
+.nav-user span {
+    margin-left: 15px;
+}
+
+/* الحاوية الرئيسية */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* بطاقات الإحصائيات */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.card ul {
+    list-style: none;
+}
+
+.card li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+/* أزرار */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #2980b9;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.btn-primary {
+    background: #27ae60;
+}
+
+.btn-primary:hover {
+    background: #2ecc71;
+}
+
+/* بطاقات الحيوانات */
+.animal-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.animal-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-right: 5px solid #3498db;
+}
+
+.animal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.animal-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: white;
+}
+
+.badge.جيد {
+    background: #27ae60;
+}
+
+.badge.ممتاز {
+    background: #f39c12;
+}
+
+.badge.بحاجة\ علاج, .badge.بحاجة\ مراقبة {
+    background: #e74c3c;
+}
+
+.animal-details {
+    margin: 10px 0;
+    color: #7f8c8d;
+}
+
+.animal-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.animal-actions form {
+    display: flex;
+    gap: 5px;
+    flex: 1;
+}
+
+.animal-actions input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+}
+
+/* نموذج تسجيل الدخول */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #34495e;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.demo-info {
+    text-align: center;
+    margin-top: 20px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* الجداول */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.table th {
+    background: #34495e;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+.table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.table tr:hover {
+    background: #f8f9fa;
+}
+
+/* التنبيهات */
+.alert {
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border-right: 5px solid #28a745;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border-right: 5px solid #dc3545;
+}
+
+.alert-warning {
+    background: #fff3cd;
+    color: #856404;
+    border-right: 5px solid #ffc107;
+}
+
+.alert-info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border-right: 5px solid #17a2b8;
+}
+
+/* البحث بالباركود */
+.barcode-search {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.barcode-search form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.barcode-search input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #3498db;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+/* الأرقام المالية */
+.positive {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.negative {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* بطاقات الملخص المالي */
+.summary-cards {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.summary-card {
+    flex: 1;
+    min-width: 200px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.summary-card.income { border-top: 5px solid #27ae60; }
+.summary-card.expense { border-top: 5px solid #e74c3c; }
+.summary-card.balance { border-top: 5px solid #3498db; }
+
+/* الرسم البياني */
+.chart-container {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
